@@ -8,33 +8,39 @@ function map(array, callback) {
     // }
 
     array.forEach((value, index) => {
-        newArray.push(callback(array[index]))
+        newArray.push(callback(value))
     })
-
 
     return newArray
    
 }
 
-sourceArray = [1,2,3]
 
-function reduce(SourceArray, callback, startingPoint ) {
+function reduce(array, callback, startingPoint ) {
 
     let total 
     if (startingPoint) {
         total = startingPoint
 
-        SourceArray.forEach((value, index) => {
-            total = callback(SourceArray[index], total )
+        array.forEach((value, index) => {
+            total = callback( value, total )
         })
+
         return total
     } else {
-  
-        total = SourceArray[0]
+      
+        total = array[0]
+        console.log(total)
 
-        SourceArray.forEach((value, index) => {
-            total = callback(SourceArray[index], total )
-        })
+        //I better use-case vs foreach.
+        // array.forEach((value, index) => {
+        //     total = callback(value, total )
+        //     console.log(total)
+        // })
+
+        for (let i = 1; i < array.length ; i++) {
+            total = callback(array[i], total )
+        }
         return total
     }
 }
